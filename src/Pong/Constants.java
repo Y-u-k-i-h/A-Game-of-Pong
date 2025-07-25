@@ -14,6 +14,7 @@ public class Constants {
     public static final int PADDLE_WIDTH = 30;
     public static final int PADDLE_HEIGHT = 100;
     public static final Color PADDLE_COLOR = Color.WHITE;
+    public static final int HORIZONTAL_PADDING = 30;
 
     // Constants for the ball
     public static final int BALL_DIAMETER = 30;

@@ -25,13 +25,13 @@ public class Window extends JFrame implements Runnable {
 
         // Draw paddles and ball
         playerOnePaddle = new Paddle(
-            0,
+            Constants.HORIZONTAL_PADDING,
             (Constants.SCREEN_HEIGHT / 2 - Constants.PADDLE_HEIGHT / 2),
             Constants.PADDLE_WIDTH,
             Constants.PADDLE_HEIGHT
             );
         playerTwoPaddle = new Paddle(
-            (Constants.SCREEN_WIDTH - Constants.PADDLE_WIDTH),
+            (Constants.SCREEN_WIDTH - Constants.HORIZONTAL_PADDING - Constants.PADDLE_WIDTH),
             (Constants.SCREEN_HEIGHT / 2 - Constants.PADDLE_HEIGHT / 2),
             Constants.PADDLE_WIDTH,
             Constants.PADDLE_HEIGHT
