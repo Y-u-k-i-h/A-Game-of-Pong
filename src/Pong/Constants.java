@@ -11,13 +11,13 @@ public class Constants {
     public static final boolean VISIBLE = true;
 
     // Constants for the paddle
-    public static final int PADDLE_WIDTH = 30;
-    public static final int PADDLE_HEIGHT = 100;
+    public static final double PADDLE_WIDTH = 10;
+    public static final double PADDLE_HEIGHT = 100;
     public static final Color PADDLE_COLOR = Color.WHITE;
-    public static final int HORIZONTAL_PADDING = 30;
+    public static final double HORIZONTAL_PADDING = 30;
 
     // Constants for the ball
-    public static final int BALL_DIAMETER = 30;
+    public static final double BALL_DIAMETER = 30;
     public static final Color BALL_COLOR = Color.WHITE;
 
 }

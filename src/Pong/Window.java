@@ -7,11 +7,13 @@ import java.awt.event.KeyEvent;
 
 public class Window extends JFrame implements Runnable {
 
-    Graphics2D g2d;
-    Listener keyListener = new Listener();
-    Paddle playerOnePaddle;
-    Paddle playerTwoPaddle;
-    Ball ball;
+    private Graphics2D g2d;
+    private Listener keyListener = new Listener();
+    private Paddle playerOnePaddle;
+    private Paddle playerTwoPaddle;
+    private Ball ball;
+    private PlayerController playerOneController;
+    private PlayerController playerTwoController;
 
     public Window() {
         this.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
@@ -26,21 +28,23 @@ public class Window extends JFrame implements Runnable {
         // Draw paddles and ball
         playerOnePaddle = new Paddle(
             Constants.HORIZONTAL_PADDING,
-            (Constants.SCREEN_HEIGHT / 2 - Constants.PADDLE_HEIGHT / 2),
+            ((double) Constants.SCREEN_HEIGHT / 2 - Constants.PADDLE_HEIGHT / 2),
             Constants.PADDLE_WIDTH,
             Constants.PADDLE_HEIGHT
             );
         playerTwoPaddle = new Paddle(
             (Constants.SCREEN_WIDTH - Constants.HORIZONTAL_PADDING - Constants.PADDLE_WIDTH),
-            (Constants.SCREEN_HEIGHT / 2 - Constants.PADDLE_HEIGHT / 2),
+            ((double) Constants.SCREEN_HEIGHT / 2 - Constants.PADDLE_HEIGHT / 2),
             Constants.PADDLE_WIDTH,
             Constants.PADDLE_HEIGHT
             );
         ball = new Ball(
-            (Constants.SCREEN_WIDTH / 2 - Constants.BALL_DIAMETER / 2),
-            (Constants.SCREEN_HEIGHT / 2 - Constants.BALL_DIAMETER / 2),
+            ((double) Constants.SCREEN_WIDTH / 2 - Constants.BALL_DIAMETER / 2),
+            ((double) Constants.SCREEN_HEIGHT / 2 - Constants.BALL_DIAMETER / 2),
             Constants.BALL_DIAMETER
             );
+
+        playerOneController = new PlayerController(playerOnePaddle, keyListener);
     }
 
     public void update(double dt) {
@@ -63,17 +67,8 @@ public class Window extends JFrame implements Runnable {
             System.exit(0);
         }
 
-        // W key moves the paddle up
-        if (keyListener.isKeyPressed(KeyEvent.VK_W)) {
-            System.out.println("W key pressed, moving paddle up");
-            // TODO: Logic to move paddle up
-        }
+        playerOneController.update(dt);
 
-        // S key moves the paddle down
-        if (keyListener.isKeyPressed(KeyEvent.VK_S)) {
-            System.out.println("S key pressed, moving paddle down");
-            // TODO: Logic to move paddle down
-        }
     }
 
     @Override
@@ -86,13 +81,31 @@ public class Window extends JFrame implements Runnable {
 
             update(deltaTime);
 
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException e) {
-                System.out.println("Thread interrupted: " + e.getMessage());
-            } catch (Exception e) {
-                System.out.println("An error occurred: " + e.getMessage());
-            }
         }
+    }
+
+    public Graphics2D getGraphics2D() {
+        if (g2d != null) {
+            return g2d;
+        } else {
+            System.out.println("Graphics2D is not initialized.");
+            return null;
+        }
+    }
+
+    public Listener getKeyListener() {
+        return keyListener;
+    }
+
+    public Paddle getPlayerOnePaddle() {
+        return playerOnePaddle;
+    }
+
+    public Paddle getPlayerTwoPaddle() {
+        return playerTwoPaddle;
+    }
+
+    public Ball getBall() {
+        return ball;
     }
 }
